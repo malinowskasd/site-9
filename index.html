@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC SHABICON | Engineering, Construction & ConTech Solutions</title>
+    <meta name="description" content="Premier engineering consulting, building construction management, and specialized software development for the construction industry.">
+    <style>
+        /* DESIGN SYSTEM: INDUSTRIAL CONTECH & ENGINEERING */
+        :root {
+            --bg-base: #111827;         /* Deep Asphalt/Slate */
+            --bg-panel: #1F2937;        /* Dark Slate Gray */
+            --tech-blue: #2563EB;       /* Engineering Blueprint Blue */
+            --safety-yellow: #F59E0B;   /* Industrial Safety Amber/Yellow */
+            --text-main: #F8FAFC;       /* Off-White */
+            --text-muted: #94A3B8;      /* Slate Gray */
+            --border-steel: rgba(148, 163, 184, 0.2);
+            
+            --font-display: 'Montserrat', 'Helvetica Neue', sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-base);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Abstract Blueprint Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Ambient Glow */
+        .ambient-glow {
+            position: fixed;
+            top: -20vh; right: -10vw;
+            width: 60vw; height: 60vh;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid var(--safety-yellow);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* CSS Construction/Tech Icon */
+        .logo-icon {
+            width: 32px; height: 32px;
+            background: var(--tech-blue);
+            position: relative;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-icon::after {
+            content: '';
+            width: 16px; height: 16px;
+            background: var(--safety-yellow);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+
+        .nav-links { display: flex; gap: 30px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;}
+        .nav-links a { text-decoration: none; color: var(--text-muted); transition: color 0.3s; }
+        .nav-links a:hover { color: var(--safety-yellow); }
+
+        .btn-nav {
+            background: transparent;
+            color: var(--safety-yellow) !important;
+            padding: 8px 20px;
+            border: 1px solid var(--safety-yellow);
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-family: var(--font-mono);
+        }
+        .btn-nav:hover { background: var(--safety-yellow); color: var(--bg-base) !important; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+
+        /* --- HERO SECTION --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 5% 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-family: var(--font-mono);
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--tech-blue);
+            padding: 8px 16px;
+            border-left: 4px solid var(--tech-blue);
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5vw, 4.8rem);
+            line-height: 1.1;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .text-gradient {
+            color: var(--safety-yellow);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 550px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--safety-yellow);
+            color: var(--bg-base);
+            padding: 18px 40px;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: var(--tech-blue);
+            color: var(--text-main);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Abstract Construction/Tech Graphic */
+        .hero-graphic {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tech-panel {
+            width: 380px; height: 420px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-steel);
+            border-top: 6px solid var(--safety-yellow);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tech-panel::after {
+            content: 'SITE_DIAGNOSTICS';
+            position: absolute; top: -14px; right: 20px;
+            background: var(--bg-base); padding: 0 10px;
+            color: var(--safety-yellow); font-family: var(--font-mono); font-size: 0.8rem;
+        }
+
+        .blueprint-block {
+            flex: 1;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(37, 99, 235, 0.05) 10px, rgba(37, 99, 235, 0.05) 20px);
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .blueprint-block::after {
+            content: ''; width: 100px; height: 100px; border: 2px dashed var(--tech-blue); border-radius: 4px;
+            transform: rotate(45deg);
+        }
+
+        .data-row-graphic { display: flex; gap: 10px; align-items: center; }
+        .data-line { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; flex: 1; }
+        .data-line.short { flex: 0.4; background: rgba(245, 158, 11, 0.3); }
+
+        /* --- OPERATIONS GRID --- */
+        .section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            color: var(--text-main);
+            font-weight: 900;
+            text-transform: uppercase;
+            border-left: 5px solid var(--tech-blue);
+            padding-left: 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--tech-blue); opacity: 0; transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--tech-blue);
+        }
+        .service-card:hover::before { opacity: 1; }
+
+        .card-icon {
+            font-family: var(--font-mono);
+            font-size: 1.6rem;
+            color: var(--safety-yellow);
+            margin-bottom: 25px;
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.1);
+            padding: 12px 18px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 4px;
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- APP PROMO (CRITICAL FOR GOOGLE PLAY CONSOLE) --- */
+        .app-promo {
+            background: linear-gradient(135deg, var(--bg-panel) 0%, #000 100%);
+            border: 1px solid var(--border-steel);
+            border-radius: 20px;
+            padding: 80px 5%;
+            margin: 60px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-promo::after {
+            content: '';
+            position: absolute;
+            right: -100px; bottom: -100px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .app-text { position: relative; z-index: 1; }
+
+        .app-text h2 {
+            font-family: var(--font-display);
+            font-size: 3.2rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .app-list { list-style: none; margin: 30px 0; }
+        .app-list li {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            color: var(--text-muted);
+        }
+        .app-list li::before {
+            content: '>>';
+            font-family: var(--font-mono);
+            color: var(--safety-yellow);
+            font-weight: bold;
+        }
+
+        /* Mobile Device Mockup for B2B Portal */
+        .mockup-phone {
+            width: 100%;
+            max-width: 320px;
+            height: 600px;
+            margin: 0 auto;
+            background: #000;
+            border: 10px solid #222;
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: 0 0 40px rgba(37, 99, 235, 0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 25px;
+            background: #222;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            flex: 1;
+            background: var(--bg-panel);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .ui-header {
+            padding: 25px 20px 15px;
+            background: #000;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--safety-yellow);
+            border-bottom: 1px solid var(--border-steel);
+            letter-spacing: 2px;
+        }
+
+        .ui-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ui-module {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--tech-blue);
+        }
+        
+        .ui-module-title { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; }
+        .ui-module-val { font-size: 1.05rem; font-weight: bold; color: var(--text-main); }
+        
+        .progress-track { height: 6px; background: rgba(255,255,255,0.1); margin-top: 10px; border-radius: 3px;}
+        .progress-fill { height: 100%; width: 60%; background: var(--safety-yellow); border-radius: 3px;}
+
+        .ui-btn {
+            margin-top: auto;
+            background: var(--tech-blue);
+            color: var(--text-main);
+            text-align: center;
+            padding: 15px;
+            font-family: var(--font-display);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+        }
+
+        /* --- VERIFICATION REGISTRY --- */
+        .registry-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+        }
+
+        .data-panel {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .data-panel::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--safety-yellow);
+        }
+
+        .data-row {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(255,255,255,0.05);
+        }
+        .data-row:last-child { border: none; margin: 0; padding: 0; }
+
+        .data-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--tech-blue);
+            margin-bottom: 5px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .data-value {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-family: var(--font-body);
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--tech-blue);
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #000;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 80px 5% 40px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: var(--safety-yellow);
+            font-family: var(--font-display);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 12px; }
+        .footer-col a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            font-family: var(--font-code);
+        }
+        .footer-col a:hover { color: var(--text-main); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: #555;
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid, .app-promo, .registry-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero-graphic { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            AC SHABICON
+        </div>
+        <div class="nav-links">
+            <a href="#services">Engineering & Build</a>
+            <a href="#app">ConTech Software</a>
+            <a href="#registry">Corporate Data</a>
+            <a href="#contact" class="btn-nav">Partner Login</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="hero-grid">
+            <div>
+                <div class="hero-tag">Engineering & Construction Tech</div>
+                <h1>Building the Future. <br><span class="text-gradient">Engineered with Code.</span></h1>
+                <p>AC SHABICON bridges the physical and digital. We deliver premier building construction management, specialized engineering design, and enterprise software for the ConTech sector.</p>
+                <a href="#app" class="btn-primary">Access SiteManager</a>
+            </div>
+            
+            <div class="hero-graphic">
+                <div class="tech-panel">
+                    <div class="blueprint-block"></div>
+                    <div class="data-row-graphic">
+                        <div class="data-line"></div>
+                        <div class="data-line short"></div>
+                    </div>
+                    <div class="data-row-graphic">
+                        <div class="data-line"></div>
+                    </div>
+                    <div style="font-family: var(--font-mono); color: var(--safety-yellow); font-size: 0.8rem; margin-top: auto; text-align: right;">[SYSTEM_ACTIVE]</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="services" class="section">
+        <div class="section-header">
+            <h2>Core Infrastructure Services</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="card-icon">[BLD_ENG]</div>
+                <h3>Construction & Engineering</h3>
+                <p>Managing large-scale Nonresidential Building Construction projects. We integrate Architectural, Engineering, and Related Services to ensure structural integrity and efficiency.</p>
+            </div>
+            <div class="service-card">
+                <div class="card-icon">&lt;SYS_DES&gt;</div>
+                <h3>Computer Systems Design</h3>
+                <p>Developing bespoke IT infrastructure for the construction industry. Our Computer Systems Design services optimize data flow between the construction site and the back office.</p>
+            </div>
+            <div class="service-card">
+                <div class="card-icon">{SFT_PUB}</div>
+                <h3>Software Publishers</h3>
+                <p>Operating as official Software Publishers. We distribute proprietary Construction Technology (ConTech) applications to global B2B clients and general contractors.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="app" class="section" style="padding-top: 0;">
+        <div class="app-promo">
+            <div class="app-text">
+                <div class="hero-tag" style="border-color: var(--safety-yellow); color: var(--safety-yellow); background: transparent;">Google Play Developer Entity</div>
+                <h2>Shabicon SiteManager</h2>
+                <p style="font-size: 1.15rem; color: var(--text-main); margin-bottom: 15px; font-weight: 600;">
+                    To digitize construction management workflows, <strong>AC SHABICON develops and publishes the proprietary B2B application Shabicon SiteManager.</strong>
+                </p>
+                <p style="color: var(--text-muted); line-height: 1.7;">
+                    Our published software allows site engineers, project managers, and specialty trade contractors to securely review architectural blueprints, monitor daily construction progress, and manage safety compliance reports directly from their Android devices on the job site.
+                </p>
+                
+                <ul class="app-list">
+                    <li>Digital Blueprint Viewer: Access CAD files and structural designs on-site.</li>
+                    <li>Progress Tracking: Monitor construction milestones and project timelines.</li>
+                    <li>Safety & Compliance: Instant submission of site inspection reports.</li>
+                    <li>Resource Management: Track heavy machinery and materials logistics.</li>
+                </ul>
+            </div>
+            
+            <div class="mockup-phone">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="ui-header">SITE_MANAGER</div>
+                    <div class="ui-content">
+                        
+                        <div class="ui-module" style="border-left-color: var(--safety-yellow);">
+                            <div class="ui-module-title">ACTIVE PROJECT</div>
+                            <div class="ui-module-val" style="color: var(--safety-yellow);">Sector 7 Commercial Build</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">Phase: Structural Framework</div>
+                        </div>
+
+                        <div class="ui-module" style="border-left-color: var(--tech-blue);">
+                            <div class="ui-module-title">PROJECT TIMELINE</div>
+                            <div class="ui-module-val">65% Completed</div>
+                            <div class="progress-track"><div class="progress-fill"></div></div>
+                        </div>
+                        
+                        <div class="ui-module" style="background: transparent; border: 1px dashed var(--border-steel);">
+                            <div class="ui-module-title">PENDING ACTION</div>
+                            <div class="ui-module-val">Approve HVAC Blueprints</div>
+                        </div>
+
+                        <div class="ui-btn">OPEN DASHBOARD</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="registry" class="section">
+        <div class="section-header">
+            <h2>Corporate Database Registry</h2>
+        </div>
+        <div class="registry-grid">
+            
+            <div class="data-panel">
+                <div class="data-row">
+                    <span class="data-label">Legal Entity Name</span>
+                    <span class="data-value">AC SHABICON</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">Industry Classification Profile</span>
+                    <span class="data-value" style="font-size: 0.95rem; line-height: 1.6;">
+                        • Nonresidential Building Construction<br>
+                        • Specialized Design Services<br>
+                        • Computer Systems Design and Related Services<br>
+                        • Software Publishers
+                    </span>
+                </div>
+                <div class="data-row" style="border: none;">
+                    <span class="data-label">Official Support Endpoint</span>
+                    <span class="data-value" style="color: var(--tech-blue);">info@acshabicon.cloud</span>
+                </div>
+            </div>
+
+            <div id="contact">
+                <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; text-transform: uppercase;">Corporate Inquiries</h3>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Contact our engineering bureau to request construction consulting, inquire about custom enterprise software, or receive support for the Shabicon SiteManager app.</p>
+                
+                <form onsubmit="event.preventDefault();">
+                    <input type="text" placeholder="Contractor Name / Project ID" required>
+                    <input type="email" placeholder="Business Email Address" required>
+                    <textarea placeholder="Describe your engineering requirements or software issue..." rows="5" required></textarea>
+                    <button type="submit" class="btn-primary" style="width: 100%; border: none; cursor: pointer;">Submit Transmission</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 20px; font-size: 1.2rem;">
+                    <div class="logo-icon" style="width: 24px; height: 24px;"></div>
+                    AC SHABICON
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Bridging the gap between physical construction engineering and advanced ConTech software solutions.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Digital Platforms</h4>
+                <ul>
+                    <li><a href="#">Google Play Publisher Status</a></li>
+                    <li><a href="#">Report App Sync Error</a></li>
+                    <li><a href="#" style="color: var(--text-main); font-weight: bold;">Request Account & Data Deletion</a></li>
+                    <li><a href="#">B2B API Documentation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Legal & Compliance</h4>
+                <ul>
+                    <li><a href="#">Software Licensing Terms</a></li>
+                    <li><a href="#">Construction Safety Standards</a></li>
+                    <li><a href="#">Privacy Policy (GDPR)</a></li>
+                    <li><a href="#">Engineering Liability</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 AC SHABICON. Systems Operational. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
